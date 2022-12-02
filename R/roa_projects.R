@@ -42,7 +42,7 @@ roa_projects <- function(grant_id = NULL, publication_id = NULL,
   country = NULL, org = NULL, model = NULL, fp7_scientific_area = NULL, 
   has_ec_funding = NULL, has_wt_funding = NULL, funder = NULL, 
   funding_stream = NULL, keywords = NULL, sort_by = NULL, sort_order = NULL, 
-  size = 1000, page = NULL, format = "xml", ...) {
+  size = 1000, page = NULL, format = "xml", raw = FALSE, ...) {
   
   if (!is.null(sort_order)) {
     if (!is.null(sort_by)) {
@@ -62,7 +62,7 @@ roa_projects <- function(grant_id = NULL, publication_id = NULL,
     format = format))
   assert_args(args)
   out <- tt_GET(path = "search/projects", query = args, ...)
-  tt_parse(out, format, xml_project)
+  tt_parse(out, format, xml_project, raw)
 }
 
 xml_names <- c(
