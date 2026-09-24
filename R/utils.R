@@ -4,7 +4,9 @@ oa_base <- function() "http://api.openaire.eu/"
 `%||%` <- function(x, y) if (is.null(x)) y else x
 `%|m|%` <- function(x, y) {
   if (length(x) == 0) return(y)
-  if (is.null(x) || !nzchar(x)) y else x
+  # x[1]: R >= 4.3 stops on a length > 1 operand of `||`; R < 4.3 used the first
+  # element, which this keeps.
+  if (is.null(x) || !nzchar(x[1])) y else x
 }
 
 comp <- function(x) Filter(Negate(is.null), x)
